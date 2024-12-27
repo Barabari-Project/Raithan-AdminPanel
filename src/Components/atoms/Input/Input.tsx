@@ -1,16 +1,5 @@
-import React, { FC, ChangeEvent } from "react";
-
-interface InputProps {
-  type?: string;
-  placeholder?: string;
-  value: string;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  name?: string;
-  label?: string;
-  outerBoxclassName?: string;
-  inputBoxclassName?: string;
-  labelBoxclassName?: string;
-}
+import React, { FC } from "react";
+import { InputProps } from "../../../Utils/types/login";
 
 const Input: FC<InputProps> = ({
   type = "text",
@@ -28,7 +17,7 @@ const Input: FC<InputProps> = ({
       <div className={`${outerBoxclassName}`}>
         <input
           type={type}
-          placeholder={placeholder}
+          placeholder={placeholder?placeholder:""}
           value={value}
           onChange={onChange}
           name={name}

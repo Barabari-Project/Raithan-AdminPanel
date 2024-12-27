@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../Utils/axiosInstance";
 import { validateEmail } from "../../Utils/validation/loginformvalidation";
 import Input from "../../Components/atoms/Input/Input";
+import { InputProps } from "../../Utils/types/login";
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState<ISignInForm>({
@@ -78,7 +79,6 @@ const Login: React.FC = () => {
 
         <Input
           type="email"
-          placeholder=" "
           value={formData.email}
           onChange={handleEmailChange}
           name="email"
@@ -92,7 +92,6 @@ const Login: React.FC = () => {
           value={formData.password}
           onChange={handlePasswordChange}
           name="password"
-          placeholder=" "
           label="Enter Your Password"
           outerBoxclassName="relative mt-2 w-full"
           inputBoxclassName="border-1 peer block w-full appearance-none rounded-lg border border-gray-300 bg-transparent px-2.5 pt-4 pb-2.5 text-sm text-gray-900 focus:border-[#50B500] focus:outline-none focus:ring-0"
