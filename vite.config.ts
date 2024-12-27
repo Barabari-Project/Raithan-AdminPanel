@@ -1,7 +1,16 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+    server: {
+        proxy: {
+            '/raithan': {
+                target: 'https://backend.barabaricollective.org',
+                changeOrigin: true,
+                secure: false, // For HTTPS
+            },
+        },
+        hmr: {
+            clientPort: 5173, // Ensure the client port matches your Vite server port
+        },
+    },
+});

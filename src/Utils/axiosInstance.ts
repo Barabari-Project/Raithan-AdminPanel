@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 
 // Create an instance of axios
 const axiosInstance = axios.create({
-    baseURL: `${import.meta.env.BASE_URL}/raithan/api/admin/auth/login`,
+    baseURL: `${import.meta.env.VITE_BASE_URL}`,
 });
 
 // Request interceptor to add the JWT token to the Authorization header
