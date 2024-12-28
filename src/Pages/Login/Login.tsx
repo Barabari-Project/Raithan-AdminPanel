@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../Utils/axiosInstance";
 import { validateEmail } from "../../Utils/validation/loginformvalidation";
 import Input from "../../Components/atoms/Input/Input";
-import { InputProps } from "../../Utils/types/login";
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState<ISignInForm>({

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import { InputProps } from "../../../Utils/types/login";
 
 const Input: FC<InputProps> = ({
