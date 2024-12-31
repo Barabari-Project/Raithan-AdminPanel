@@ -2,20 +2,21 @@ import React from "react";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import Cookies from "js-cookie";
-import { HOME } from "../../Utils/routes";
+import { SERVICEPROVIDER } from "../../Utils/routes";
 import { SIGNIN } from "../../Utils/restEndPoints";
 import { ISignInForm } from "../../Utils/types/form";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../Utils/axiosInstance";
 import { validateEmail } from "../../Utils/validation/loginformvalidation";
 import Input from "../../Components/atoms/Input/Input";
-import { InputProps } from "../../Utils/types/login";
+import ButtonLoader from "../../Components/atoms/ButtonLoader/ButtonLoader";
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState<ISignInForm>({
     email: "",
     password: "",
   });
+  const [isButtonLoader, setIsButtonLoader] = useState<boolean>(false); // State to track button loader state [btnLoader]
 
   const navigate = useNavigate();
 
@@ -31,13 +32,16 @@ const Login: React.FC = () => {
   };
 
   const handleSignInClick = async () => {
+    setIsButtonLoader(true);
     if (!formData.email || !formData.password) {
       toast.error("Please fill all the fields");
+      setIsButtonLoader(false);
       return;
     }
 
     if (!validateEmail(formData.email)) {
       toast.error("Invalid Email");
+      setIsButtonLoader(false);
       return;
     }
 
@@ -50,10 +54,16 @@ const Login: React.FC = () => {
       // Handle successful sign-in
       toast.success("Sign-in successful");
       // toast.success(response.data.message);
+
       Cookies.set("token", response.data.token);
+
       setFormData({ email: "", password: "" });
-      navigate(HOME);
+
+      navigate(SERVICEPROVIDER);
+      
+      setIsButtonLoader(false);
     } catch (error: any) {
+      setIsButtonLoader(false);
       if (
         error.response &&
         error.response.data &&
@@ -98,13 +108,13 @@ const Login: React.FC = () => {
           labelBoxclassName="origin-[0] peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:scale-100 peer-focus:top-2 peer-focus:-translate-y-4 peer-focus:scale-75 peer-focus:px-2 peer-focus:text-[#50B500] absolute left-1 top-2 z-10 -translate-y-4 scale-75 transform cursor-text select-none bg-white px-2 text-sm text-gray-500 duration-300"
         />
 
-        <div className="flex w-full items-center">
-          <button
+        <div className="flex w-full justify-center items-center">
+          {!isButtonLoader ?<button
             onClick={handleSignInClick}
             className="mx-auto w-36 rounded-lg bg-[#50B500] py-3 font-bold text-white"
           >
             Login
-          </button>
+          </button>:<ButtonLoader />}
         </div>
 
         {/* Forgot Password is optional */}
