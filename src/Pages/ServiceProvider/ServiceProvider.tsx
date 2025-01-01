@@ -9,6 +9,7 @@ function ServiceProvider() {
   const [serviceProviders, setServiceProviders] = React.useState([]);
   const [filteredProviders, setFilteredProviders] = React.useState([]);
   const [filterStatus, setFilterStatus] = React.useState("all");
+  const [searchQuery, setSearchQuery] = React.useState("");
 
   const navigate = useNavigate();
 
@@ -31,6 +32,20 @@ function ServiceProvider() {
     }
   };
 
+  const handleSearch = () => {
+    const trimmedQuery = searchQuery.trim().toLowerCase();
+
+    const filtered = serviceProviders.filter((provider: ServiceProvider) => {
+      const firstName = provider.firstName?.toLowerCase() || "";
+      const lastName = provider.lastName?.toLowerCase() || "";
+      return (
+        firstName.includes(trimmedQuery) || lastName.includes(trimmedQuery)
+      );
+    });
+
+    setFilteredProviders(filtered);
+  };
+
   useEffect(() => {
     fetchServiceProviders();
   }, []);
@@ -40,19 +55,50 @@ function ServiceProvider() {
       <Header />
       <div className="w-[95%] mx-auto shadow-xl my-6 rounded-xl overflow-hidden">
         <div className="w-full flex items-center justify-between py-7 px-4">
-          <h1 className="text-xl font-semibold">Service Providers</h1>
-          <select 
-          value={filterStatus}
-          onChange={(e) => handleFilterChange(e.target.value)}
-           className="px-4 py-2 border bg-lime-100 rounded-xl outline-none">
-            <option className="capitalize" value="all">All</option>
-            <option className="capitalize" value="pending">pending</option>
-            <option className="capitalize" value="otp_verified">otp verified</option>
-            <option className="capitalize" value="email_verified">email verified</option>
-            <option className="capitalize" value="business_details_remaining">business details remaining</option>
-            <option className="capitalize" value="completed">completed</option>
-            <option className="capitalize" value="verified">verified</option>
-            <option className="capitalize" value="rejected">rejected</option>            
+          <h1 className="text-xl font-semibold px-4 py-1 rounded-xl bg-lime-100">
+            Service Providers
+          </h1>
+          <div>
+            <input
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              type="text"
+              placeholder="Search"
+              className="px-4 py-2 border bg-lime-100 rounded-xl outline-none"
+              name=""
+              id=""
+            />
+          </div>
+          <select
+            value={filterStatus}
+            onChange={(e) => handleFilterChange(e.target.value)}
+            className="px-4 py-2 border bg-lime-100 rounded-xl outline-none"
+          >
+            <option className="capitalize" value="all">
+              All
+            </option>
+            <option className="capitalize" value="pending">
+              pending
+            </option>
+            <option className="capitalize" value="otp_verified">
+              otp verified
+            </option>
+            <option className="capitalize" value="email_verified">
+              email verified
+            </option>
+            <option className="capitalize" value="business_details_remaining">
+              business details remaining
+            </option>
+            <option className="capitalize" value="completed">
+              completed
+            </option>
+            <option className="capitalize" value="verified">
+              verified
+            </option>
+            <option className="capitalize" value="rejected">
+              rejected
+            </option>
           </select>
         </div>
         <div className="w-full ">
@@ -134,7 +180,7 @@ function ServiceProvider() {
 
                   <td
                     width={"20%"}
-                    className="whitespace-normal py-4 text-xs xl:text-lg font-medium text-gray-500 px-6"
+                    className="whitespace-normal py-4 text-xs xl:text-md font-medium text-gray-500 px-6"
                   >
                     <div
                       className={`${
