@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import Cookies from "js-cookie";
 import { SERVICEPROVIDER } from "../../Utils/routes";
-import { SIGNIN } from "../../Utils/restEndPoints";
+import { Sign_In } from "../../Utils/restEndPoints";
 import { ISignInForm } from "../../Utils/types/form";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../Utils/axiosInstance";
@@ -47,7 +47,7 @@ const Login: React.FC = () => {
 
     try {
       const { email, password } = formData;
-      const response = await axiosInstance.post(SIGNIN, { email, password });
+      const response = await axiosInstance.post(Sign_In, { email, password });
 
       console.log("response data", response.data);
 

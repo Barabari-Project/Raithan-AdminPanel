@@ -1,10 +1,7 @@
 import React from "react";
 
-type Props = {
-    children?: React.ReactNode;
-};
 
-const ButtonLoader = (props: Props) => {
+const ButtonLoader: React.FC = () => {
   return (
     <div className="w-fit">
       <button className="flex items-center gap-x-4 rounded-xl bg-[rgb(81,181,0)] px-8 py-3 font-medium text-white">

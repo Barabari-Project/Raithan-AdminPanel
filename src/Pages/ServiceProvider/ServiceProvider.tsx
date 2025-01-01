@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import Header from "../../Components/Header/Header";
 import axiosInstance from "../../Utils/axiosInstance";
-import { SERVICEPROVIDER } from "../../Utils/restEndPoints";
+import { Service_Provider } from "../../Utils/restEndPoints";
 import { useNavigate } from "react-router-dom";
 import { formatSnakeCaseToReadable } from "../../Utils/formateSnakeCasetoCamelCase";
-
-function ServiceProvider() {
+import { IServiceProviders } from "../../Utils/types/ServiceProvider";
+const ServiceProvider: React.FC = () =>{
   const [serviceProviders, setServiceProviders] = React.useState([]);
   const [filteredProviders, setFilteredProviders] = React.useState([]);
   const [filterStatus, setFilterStatus] = React.useState("all");
@@ -14,7 +14,7 @@ function ServiceProvider() {
   const navigate = useNavigate();
 
   const fetchServiceProviders = async () => {
-    const response = await axiosInstance.get(SERVICEPROVIDER);
+    const response = await axiosInstance.get(Service_Provider);
     console.log(response.data);
     setServiceProviders(response.data);
     setFilteredProviders(response.data);
@@ -27,7 +27,7 @@ function ServiceProvider() {
       setFilteredProviders(serviceProviders);
     } else {
       setFilteredProviders(
-        serviceProviders.filter((provider: any) => provider.status === status)
+        serviceProviders.filter((provider: IServiceProviders) => provider.status === status)
       );
     }
   };
@@ -35,7 +35,7 @@ function ServiceProvider() {
   const handleSearch = () => {
     const trimmedQuery = searchQuery.trim().toLowerCase();
 
-    const filtered = serviceProviders.filter((provider: ServiceProvider) => {
+    const filtered = serviceProviders.filter((provider: IServiceProviders) => {
       const firstName = provider.firstName?.toLowerCase() || "";
       const lastName = provider.lastName?.toLowerCase() || "";
       return (
@@ -141,7 +141,7 @@ function ServiceProvider() {
               </tr>
             </thead>
             <tbody className="">
-              {filteredProviders.map((serviceProvider: any) => (
+              {filteredProviders.map((serviceProvider: IServiceProviders) => (
                 <tr
                   onClick={() => navigate(`/${serviceProvider._id}`)}
                   key={serviceProvider._id}

@@ -2,9 +2,9 @@ import React from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/raitanlogo.png";
-type Props = {};
 
-const Header = (props: Props) => {
+
+const Header: React.FC = () => {
   const [hamburgerOpen, setHamburgerOpen] = React.useState(false);
   const navigate = useNavigate();
 

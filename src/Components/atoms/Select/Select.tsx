@@ -1,9 +1,7 @@
 import React from "react";
 import './Select.css'
 
-type Props = {};
-
-const Select = (props: Props) => {
+const Select: React.FC = () => {
   return (
     <div className="select">
       <div
