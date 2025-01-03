@@ -86,7 +86,7 @@ const ServiceSeekerProfile: React.FC = () => {
       {loadingSeeker ? (
         <Loader />
       ) : (
-        <div className="w-screen min-h-screen max-screen pt-10">
+        <div className="w-full min-h-full max-full pt-10">
           {/* Service Seeker Details */}
           <div className="w-full py-7 px-4">
             {seeker ? (
