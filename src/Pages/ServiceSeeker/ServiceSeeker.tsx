@@ -79,7 +79,7 @@ const ServiceSeekerPage: React.FC = () => {
               <tr
                 key={seeker._id}
                 onClick={() => handleSeekerClick(seeker)}
-                className="hover:cursor-pointer hover:bg-lime-200 transition-all duration-300 ease-in-out transform hover:scale-105"
+                className="hover:cursor-pointer hover:bg-lime-200 transition-all duration-300 ease-in-out scale-95 transform hover:scale-100"
                 >
                 <td className="py-4 font-medium text-gray-600 text-center px-6">{seeker.name || "N/A"}</td>
                 <td className="py-4 font-medium text-gray-600 text-center px-6">{seeker.mobileNumber || "N/A"}</td>
