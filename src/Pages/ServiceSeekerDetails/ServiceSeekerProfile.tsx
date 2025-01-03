@@ -120,8 +120,8 @@ const ServiceSeekerProfile: React.FC = () => {
 
           {/* Call History */}
           <div className="w-[90%] rounded-3xl mx-auto p-8 bg-[rgba(94,102,113,0.09)] text-black flex flex-col items-start">
-          <h3 className="border-l-4 border-lime-500 px-2 text-lg font-semibold mb-5">Call History</h3>
-          <div className="w-[90%] rounded-3xl mx-auto p-8 bg-white text-black flex flex-col items-start">
+          <h3 className="border-l-4 border-lime-500 px-2 text-lg font-semibold ">Call History</h3>
+          <div className="w-[90%] rounded-3xl mx-auto py-8 px-6 bg-white text-black flex flex-col items-start">
             {loadingHistory ? (
               <p>Loading call history...</p>
             ) : error ? (
