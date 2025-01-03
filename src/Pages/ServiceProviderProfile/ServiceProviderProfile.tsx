@@ -36,7 +36,7 @@ const ServiceProviderProfile: React.FC = () => {
       {Object.keys(profile).length == 0 ? (
         <Loader />
       ) : (
-        <div className="w-screen min-h-screen max-screen pt-10">
+        <div className="w-full min-h-full max-full pt-10">
           <div className="w-[80%] rounded-3xl mx-auto p-12 bg-[rgba(94,102,113,0.09)] text-black flex flex-col items-start">
             <h1 className="border-l-4 border-lime-500 px-2 text-xl text-semibold">
               Details 
