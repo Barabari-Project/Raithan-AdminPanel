@@ -121,9 +121,12 @@ const ServiceSeekerPage: React.FC = () => {
                   <td className="whitespace-normal py-4 font-medium text-gray-500 px-6">
                     {seeker.mobileNumber}
                   </td>
-                  <td className="whitespace-normal py-4 font-medium text-gray-500 px-6">
+                  <td
+                    width={"20%"}
+                    className="whitespace-normal py-4 font-medium text-gray-500 px-6"
+                  >
                     <div
-                      className={`inline-flex items-center rounded-full py-2 px-3 text-white ${
+                      className={`inline-flex items-center rounded-full text-sm py-2 px-3 text-white ${
                         seeker.status === "verified"
                           ? "bg-green-600"
                           : seeker.status === "pending"
