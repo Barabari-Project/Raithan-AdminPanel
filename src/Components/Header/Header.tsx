@@ -1,8 +1,8 @@
 import React from "react";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { SERVICESEEKER } from "../../Utils/routes"; // Import the route here
 import logo from "../../assets/raitanlogo.png";
-
 
 const Header: React.FC = () => {
   const [hamburgerOpen, setHamburgerOpen] = React.useState(false);
@@ -11,6 +11,10 @@ const Header: React.FC = () => {
   const handleClickLogout = () => {
     Cookies.remove('token');
     navigate('/login', { replace: true });
+  };
+
+  const handleServiceSeekerClick = () => {
+    navigate(SERVICESEEKER); // Navigate to the service seeker route
   };
 
   return (
@@ -29,7 +33,10 @@ const Header: React.FC = () => {
           <div className="hover:text-blue-600 hover:cursor-pointer hover:scale-110 font-semibold transition-all duration-500">
             Service Provider
           </div>
-          <div className="hover:text-blue-600 hover:cursor-pointer hover:scale-110 font-semibold transition-all duration-500">
+          <div
+            onClick={handleServiceSeekerClick} // Add the click handler here
+            className="hover:text-blue-600 hover:cursor-pointer hover:scale-110 font-semibold transition-all duration-500"
+          >
             Service Seeker
           </div>
           <button onClick={handleClickLogout} className="bg-blue-600 text-white px-4 py-2 rounded-md">
@@ -52,7 +59,10 @@ const Header: React.FC = () => {
         <div className="hover:text-blue-600 hover:cursor-pointer hover:scale-110 font-semibold transition-all duration-500">
           Service Provider
         </div>
-        <div className="hover:text-blue-600 hover:cursor-pointer hover:scale-110 font-semibold transition-all duration-500">
+        <div
+          onClick={handleServiceSeekerClick} // Add the click handler here
+          className="hover:text-blue-600 hover:cursor-pointer hover:scale-110 font-semibold transition-all duration-500"
+        >
           Service Seeker
         </div>
         <button onClick={handleClickLogout} className="bg-blue-600 text-white px-4 py-1 rounded-md">
