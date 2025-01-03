@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../../Utils/axiosInstance";
-import { SERVICEPROVIDERBYID } from "../../Utils/routes";
+import { Service_Provider_By_Id } from "../../Utils/restEndPoints";
 import { IServiceProvidersByID } from "../../Utils/types/ServiceProvider";
 import Loader from "../../Components/atoms/PageLoader/Loader";
 import tick from '../../assets/verify.png'
@@ -11,8 +11,20 @@ const ServiceProviderProfile: React.FC = () => {
 
   const { id } = useParams<{ id: string }>();
 
+  const handleVerify = async () => {
+    const response = await axiosInstance.get(`${Service_Provider_By_Id}/${id}/verify`);
+    console.log("data", response.data);
+    setProfile(response.data.serviceProvider);
+  };
+
+  const handleReject = async () => {
+    const response = await axiosInstance.get(`${Service_Provider_By_Id}/${id}/reject`);
+    console.log("data", response.data);
+    setProfile(response.data.serviceProvider);
+  };
+
   const fetchServiceProviderUsingId = async () => {
-    const response = await axiosInstance.get(`${SERVICEPROVIDERBYID}/${id}`);
+    const response = await axiosInstance.get(`${Service_Provider_By_Id}/${id}`);
     console.log("data", response.data.serviceProvider);
     setProfile(response.data.serviceProvider);
   };
@@ -47,6 +59,12 @@ const ServiceProviderProfile: React.FC = () => {
                     <span className={`capitalize rounded-full px-3  ${profile?.status == 'verified'? 'text-[rgb(26,84,71)]': profile?.status=='pending'? 'text-[rgb(254,242,123)]' : 'text-red-900'}
                     ${profile?.status == 'verified'? 'bg-[rgb(159,224,214)]': profile?.status=='pending'? 'bg-[rgb(42,40,31)]' : 'bg-red-100'}
                     `}>{profile?.status}</span>
+                    <span className={`${profile?.status == 'completed'? 'flex' : 'hidden'} pt-5 gap-5`}>
+                      <button
+                      onClick={()=>handleVerify()}
+                       className="border border-black rounded-xl px-4 py-1 text-[rgb(81,181,0)] hover:scale-110 duration-300 font-bold">Verify</button>
+                      <button onClick={()=>handleReject()} className="border border-black rounded-xl px-4 py-1 text-[rgb(249,57,57)] hover:scale-110 duration-300 font-bold">Reject</button>
+                    </span>
                   </span>
                 </div>
               </div>
